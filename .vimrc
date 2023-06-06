@@ -168,5 +168,11 @@ nnoremap ss :split<CR>
 " Vertical split
 nnoremap sv :vsplit<CR>
 
+nnoremap sj <C-w>j
+nnoremap sh <C-w>h
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+
+
 
 "------------------------------------------------------------
