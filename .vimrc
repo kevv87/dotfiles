@@ -161,4 +161,12 @@ map Y y$
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
 
+nnoremap te :tabedit<CR>
+" Horizontal split
+nnoremap ss :split<CR>
+
+" Vertical split
+nnoremap sv :vsplit<CR>
+
+
 "------------------------------------------------------------
