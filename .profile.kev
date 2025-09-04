@@ -1,6 +1,8 @@
 export PATH="~/.local/bin":$PATH
 
 # Aliases
+declare -x COLORTERM="truecolor"
+export PS1='\[\e[34m\] λ \W \[\e[0m\]'
 alias gita='git commit --amend --no-edit'
 alias gitac='git add ../* -u && git commit -m'
 alias grep='grep --color=auto'
