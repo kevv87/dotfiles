@@ -1,3 +1,5 @@
+export PATH="~/.local/bin":$PATH
+
 # Aliases
 alias gita='git commit --amend --no-edit'
 alias gitac='git add ../* -u && git commit -m'
