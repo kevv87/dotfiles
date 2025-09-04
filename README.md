@@ -10,4 +10,19 @@ You need the following:
 - nvim + AstroNvim
 - bash
 - eza
+- tmux + TPM
+
+## Bash
+Lo que hago es desde .bashrc hacer source a .profile.kev
+```bash
+source <repo>/.profile.kev
+```
+
+## Tmux
+Soft link to .tmux.conf
+```bash
+ln -s <repo>/.tmux.conf ~/.tmux.conf
+```
+
+Then <prefix> + I to install plugins
 
