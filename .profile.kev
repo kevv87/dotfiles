@@ -1,0 +1,83 @@
+# Aliases
+alias gita='git commit --amend --no-edit'
+alias gitac='git add ../* -u && git commit -m'
+alias grep='grep --color=auto'
+alias gitsuno='git status -suno'
+alias gitpf='git push -u origin $(current_branch) --force-with-lease'
+alias compntest='comp && test'
+alias gitlone='git log --oneline'
+alias gr='grep -rn'
+alias gitadu='git add -u '
+alias gitcom='git commit -m'
+alias grl='gr -l'
+alias gco='git checkout'
+alias pgdb='gdb --pid'
+alias git_is_ancestor='git merge-base --is-ancestor'
+alias ls='eza --color=always --icons=always -lhG --no-permissions --no-user'
+alias lt='ls --tree --level=2'
+alias ctar='tar -cvf'
+
+# My functions
+function lg() {
+  ls "$1" | grep "$2"
+}
+
+al() {
+    if [ $# -ne 2 ]; then
+        echo "Uso: make_alias <nombre> <comando>"
+        return 1
+    fi
+    alias "$1"="$2"
+}
+
+
+
+upto () 
+{ 
+    local EXPRESSION="$1";
+    if [ -z "$EXPRESSION" ]; then
+        echo "A folder expression must be provided." 1>&2;
+        return 1;
+    fi;
+    if [ "$EXPRESSION" = "/" ]; then
+        cd "/";
+        return 0;
+    fi;
+    local CURRENT_FOLDER="$(pwd)";
+    local MATCHED_DIR="";
+    local MATCHING=true;
+    while [ "$MATCHING" = true ]; do
+        if [[ "$CURRENT_FOLDER" =~ "$EXPRESSION" ]]; then
+            MATCHED_DIR="$CURRENT_FOLDER";
+            CURRENT_FOLDER=$(dirname "$CURRENT_FOLDER");
+        else
+            MATCHING=false;
+        fi;
+    done;
+    if [ -n "$MATCHED_DIR" ]; then
+        cd "$MATCHED_DIR";
+        return 0;
+    else
+        echo "No Match." 1>&2;
+        return 1;
+    fi
+}
+
+gitriba() {
+  if [ "$#" -ne 1 ]; then
+    echo "Usage: git-rebase-onto-merge-base <branch>"
+    return 1
+  fi
+
+  local current_branch=$(git rev-parse --abbrev-ref HEAD)
+  local given_branch=$1
+  local base=$(git merge-base "$current_branch" "$given_branch")
+
+  if [ -z "$base" ]; then
+    echo "Could not find a common ancestor for branches $current_branch and $given_branch"
+    return 1
+  fi
+
+  git rebase -i "$base"
+}
+
