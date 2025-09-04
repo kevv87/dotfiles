@@ -20,6 +20,7 @@ alias git_is_ancestor='git merge-base --is-ancestor'
 alias ls='eza --color=always --icons=always -lhG --no-permissions --no-user'
 alias lt='ls --tree --level=2'
 alias ctar='tar -cvf'
+alias change_bash='nvim $MY_DISK/dotfiles/.profile.kev && source $MY_DISK/dotfiles/.profile.kev'
 
 # My functions
 function lg() {

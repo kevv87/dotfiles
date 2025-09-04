@@ -29,6 +29,7 @@ ln -s <repo>/.tmux.conf ~/.tmux.conf
 Then <prefix> + I to install plugins
 
 ## Nvim
+Also try Neovide: https://github.com/neovide/neovide/tree/0.15.1
 We use AstroNvim, so we need to make sure to have its prerequisites:
 
 ### Prerequisites
