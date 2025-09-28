@@ -28,11 +28,20 @@ function lg() {
 }
 
 al() {
-    if [ $# -ne 2 ]; then
-        echo "Uso: make_alias <nombre> <comando>"
-        return 1
+    if [ "$1" = "-p" ]; then
+        if [ $# -ne 3 ]; then
+            echo "Usage: al <-p (permanent)> <name> <command>"
+            return 1
+        fi
+        alias "$2"="$3"
+        echo "alias $2=\"$3\"" >> $ALIAS_FILE
+    else
+        if [ $# -ne 2 ]; then
+            echo "Usage: al <name> <command>"
+            return 1
+        fi
+        alias "$1"="$2"
     fi
-    alias "$1"="$2"
 }
 
 

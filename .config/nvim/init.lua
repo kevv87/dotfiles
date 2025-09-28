@@ -4,10 +4,13 @@ local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
 if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
   -- stylua: ignore
-  local result = vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+  local result = vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", lazypath })
   if vim.v.shell_error ~= 0 then
     -- stylua: ignore
-    vim.api.nvim_echo({ { ("Error cloning lazy.nvim:\n%s\n"):format(result), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
+    vim.api.nvim_echo(
+      { { ("Error cloning lazy.nvim:\n%s\n"):format(result), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } },
+      true, {})
     vim.fn.getchar()
     vim.cmd.quit()
   end
@@ -18,10 +21,21 @@ vim.opt.rtp:prepend(lazypath)
 -- validate that lazy is available
 if not pcall(require, "lazy") then
   -- stylua: ignore
-  vim.api.nvim_echo({ { ("Unable to load lazy from: %s\n"):format(lazypath), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
+  vim.api.nvim_echo(
+    { { ("Unable to load lazy from: %s\n"):format(lazypath), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } },
+    true, {})
   vim.fn.getchar()
   vim.cmd.quit()
 end
+
+vim.o.background = "light"
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+
+-- vim.g.copilot_no_tab_map = true
+-- vim.keymap.set('i', '<S-Tab>', 'copilot#Accept("\\<S-Tab>")', { expr = true, replace_keycodes = false })
 
 require "lazy_setup"
 require "polish"
