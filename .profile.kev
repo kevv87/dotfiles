@@ -18,13 +18,19 @@ alias gco='git checkout'
 alias pgdb='gdb --pid'
 alias git_is_ancestor='git merge-base --is-ancestor'
 alias ls='eza --color=always --icons=always -lhG --no-permissions --no-user'
+alias lah='eza --color=always --icons=always -lhG'
 alias lt='ls --tree --level=2'
 alias ctar='tar -cvf'
 alias change_bash='nvim $MY_DISK/dotfiles/.profile.kev && source $MY_DISK/dotfiles/.profile.kev'
+alias game='tmux attach -t NetHack || tmux new -s NetHack'
 
 # My functions
 function lg() {
-  ls "$1" | grep "$2"
+  if [ -z "$2" ]; then
+    ls | grep "$1"
+  else
+    ls "$1" | grep "$2"
+  fi
 }
 
 al() {
@@ -94,4 +100,3 @@ gitriba() {
 
   git rebase -i "$base"
 }
-
