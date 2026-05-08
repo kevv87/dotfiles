@@ -1,28 +1,46 @@
-export PATH="~/.local/bin":$PATH
+export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$PATH"
 
 # Aliases
 declare -x COLORTERM="truecolor"
 export PS1='\[\e[34m\] λ \W \[\e[0m\]'
+
+# Git aliases
+alias gf='git fetch'
 alias gita='git commit --amend --no-edit'
 alias gitac='git add ../* -u && git commit -m'
-alias grep='grep --color=auto'
 alias gitsuno='git status -suno'
 alias gitpf='git push -u origin $(current_branch) --force-with-lease'
-alias compntest='comp && test'
 alias gitlone='git log --oneline'
-alias gr='grep -rn'
 alias gitadu='git add -u '
 alias gitcom='git commit -m'
-alias grl='gr -l'
 alias gco='git checkout'
-alias pgdb='gdb --pid'
 alias git_is_ancestor='git merge-base --is-ancestor'
+alias reb='git rebase'
+alias gitu="git status -s | grep ^U | awk '{print $2}'"
+alias gitus='git submodule update --init --recursive && git submodule update --recursive --remote'
+alias gclean='git clean -fdx'
+alias fix_git_ref='git --no-optional-locks fetch --prune origin '
+alias git_clean_branch='export CURRENT_BRANCH=$(current_branch) && gco -f develop && git branch -D $CURRENT_BRANCH && gf && gco -f $CURRENT_BRANCH'
+alias git_find_fork_point='git merge-base --fork-point'
+
+# General aliases
+alias grep='grep --color=auto'
+alias gr='grep -rn'
+alias grl='gr -l'
+alias compntest='comp && test'
+alias pgdb='gdb --pid'
 alias ls='eza --color=always --icons=always -lhG --no-permissions --no-user'
 alias lah='eza --color=always --icons=always -lhG'
 alias lt='ls --tree --level=2'
 alias ctar='tar -cvf'
 alias change_bash='nvim $MY_DISK/dotfiles/.profile.kev && source $MY_DISK/dotfiles/.profile.kev'
 alias game='tmux attach -t NetHack || tmux new -s NetHack'
+alias nv='nvim'
+alias ask_copito='copilot --allow-all-tools -p'
+alias notif='echo "**** NOTIF NOW RUNNING****"&&${ANIMATE} ${NOTIF_GIF_SUCC}'
+alias nv='nvim'
+alias gotonvim='cd $MY_DISK/.config/nvim'
+alias copito_review='copilot --agent pr-review-orchestrator'
 
 # My functions
 function lg() {
