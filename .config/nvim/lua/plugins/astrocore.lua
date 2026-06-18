@@ -21,6 +21,7 @@ return {
     diagnostics = {
       virtual_text = true,
       underline = true,
+      jump = { float = vim.NIL }, -- override AstroNvim's deprecated jump.float (nvim 0.11 compat shim)
     },
     -- passed to `vim.filetype.add`
     filetypes = {

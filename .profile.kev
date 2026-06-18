@@ -1,4 +1,6 @@
-export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$PATH"
+[ -f "$HOME/.papaya" ] && source "$HOME/.papaya"
+
+export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$PATH"
 
 # Aliases
 declare -x COLORTERM="truecolor"
@@ -30,8 +32,9 @@ alias grl='gr -l'
 alias compntest='comp && test'
 alias pgdb='gdb --pid'
 alias ls='eza --color=always --icons=always -lhG --no-permissions --no-user'
-alias lah='eza --color=always --icons=always -lhG'
+alias lah='eza --color=always --icons=always -lahG'
 alias lt='ls --tree --level=2'
+alias l='ls'
 alias ctar='tar -cvf'
 alias change_bash='nvim $MY_DISK/dotfiles/.profile.kev && source $MY_DISK/dotfiles/.profile.kev'
 alias game='tmux attach -t NetHack || tmux new -s NetHack'
@@ -41,6 +44,9 @@ alias notif='echo "**** NOTIF NOW RUNNING****"&&${ANIMATE} ${NOTIF_GIF_SUCC}'
 alias nv='nvim'
 alias gotonvim='cd $MY_DISK/.config/nvim'
 alias copito_review='copilot --agent pr-review-orchestrator'
+alias zc='docker exec zeroclaw zeroclaw'
+
+alias change_bash_local='nvim $MY_DISK/.profile.$USER.local && source $MY_DISK/.profile.$USER.local'
 
 # My functions
 function lg() {
@@ -118,3 +124,28 @@ gitriba() {
 
   git rebase -i "$base"
 }
+
+if command -v zoxide &>/dev/null; then
+    eval "$(zoxide init bash)"
+else
+    echo "Warn!! Missing zoxide binary"
+fi
+
+copy() {
+  local input
+  input=$(cat)
+
+  if [ -n "$TMUX" ]; then
+    printf '%s' "$input" | tmux load-buffer -
+    echo "✓ Copied to tmux buffer" >&2
+  elif [ -n "$WAYLAND_DISPLAY" ] && command -v wl-copy &>/dev/null; then
+    printf '%s' "$input" | wl-copy
+    echo "✓ Copied via wl-copy" >&2
+  else
+    echo "copy: no clipboard method available" >&2
+    return 1
+  fi
+}
+
+# opencode
+export PATH=/home/kev/.opencode/bin:$PATH

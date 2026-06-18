@@ -1,0 +1,18 @@
+flowchart TD
+    Client["🌐 Client (Browser/App)"]
+    GW["API Gateway\n:3000"]
+    Auth["Auth Service\n:3001"]
+    Users["Users Service\n:3002"]
+    DB[("PostgreSQL")]
+    Cache[("Redis Cache")]
+    Queue["Message Queue\nRabbitMQ"]
+    Worker["Background Worker"]
+
+    Client -->|"HTTPS"| GW
+    GW -->|"validate token"| Auth
+    GW -->|"route"| Users
+    Auth --> Cache
+    Users --> DB
+    Users --> Queue
+    Queue --> Worker
+    Worker --> DB

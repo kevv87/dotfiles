@@ -1,7 +1,18 @@
 return {
   {
-    "sindrets/diffview.nvim",
-    opts = {}
+    "folke/sidekick.nvim",
+    opts = {
+      nes = {
+        enabled = true,
+      },
+      cli = {
+        win = {
+          split = {
+            width = 45
+          }
+        },
+      },
+    },
   },
 }
 

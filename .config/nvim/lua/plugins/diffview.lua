@@ -1,6 +1,6 @@
 return {
   {
-    "folke/sidekick.nvim",
+    "sindrets/diffview.nvim",
     opts = {}
   },
 }
